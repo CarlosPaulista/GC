@@ -2,26 +2,26 @@
 #include <stdio.h>
 
 
-typedef struct referencia {
+typedef struct referencias {
     void *valor;
     void *refs;
-} referencia;
+} referencias;
 
-referencia *malloc2(int tamanho);
+referencias *malloc2(int tamanho);
 
-void atrib2(referencia **a, referencia **b);
+void atrib2(referencias **a, referencias **b);
 
 
-referencia *malloc2(int tamanho) {
-    referencia *a = (referencia *) malloc(tamanho);
+referencias *malloc2(int tamanho) {
+    referencias *a = (referencias *) malloc(tamanho);
     a->refs = 1;
     return a;
 }
 
-void atrib2(referencia **a, referencia **b) {
+void atrib2(referencias **a, referencias **b) {
     if (*b == NULL) {
         if ((*a)->refs == 1) {
-            referencia *aux = *a;
+            referencias *aux = *a;
             *a = NULL;
             aux->refs = aux->refs - 1;
             free(aux);
@@ -34,7 +34,7 @@ void atrib2(referencia **a, referencia **b) {
     }
 
     if ((*a)->refs == 1) {
-        referencia *aux = *a;
+        referencias *aux = *a;
         *a = *b;
         (*b)->refs =(*b)->refs + 1;
         aux->refs = aux->refs - 1;;
